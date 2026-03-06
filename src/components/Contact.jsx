@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import emailjs from '@emailjs/browser';
 import { FiSend, FiLinkedin, FiMail, FiPhone, FiMapPin } from 'react-icons/fi';
 
 const Contact = () => {
@@ -8,20 +7,36 @@ const Contact = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [messageStatus, setMessageStatus] = useState(null);
 
-    const sendEmail = (e) => {
+    const sendEmail = async (e) => {
         e.preventDefault();
         setIsSubmitting(true);
 
-        // Integration Note: To make this form fully functional and receive emails at kunlebalo2002@gmail.com,
-        // you can use a service like Formspree (https://formspree.io) or EmailJS.
+        const formData = new FormData(form.current);
+        const data = Object.fromEntries(formData.entries());
 
-        // Simulating email send for demonstration
-        setTimeout(() => {
+        try {
+            const response = await fetch("https://formsubmit.co/ajax/kunlebalo2002@gmail.com", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+                setMessageStatus('success');
+                form.current.reset();
+                setTimeout(() => setMessageStatus(null), 5000);
+            } else {
+                setMessageStatus('error');
+            }
+        } catch (error) {
+            console.error("Error sending message:", error);
+            setMessageStatus('error');
+        } finally {
             setIsSubmitting(false);
-            setMessageStatus('success');
-            form.current.reset();
-            setTimeout(() => setMessageStatus(null), 5000);
-        }, 1500);
+        }
     };
 
     const contactInfo = [
@@ -127,6 +142,16 @@ const Contact = () => {
                                         className="bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 p-4 rounded-xl text-center font-bold"
                                     >
                                         Message sent successfully! I'll get back to you soon.
+                                    </motion.div>
+                                )}
+
+                                {messageStatus === 'error' && (
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        className="bg-rose-100 dark:bg-rose-900/30 text-rose-700 dark:text-rose-400 p-4 rounded-xl text-center font-bold"
+                                    >
+                                        Something went wrong! Please try again later.
                                     </motion.div>
                                 )}
                             </form>
