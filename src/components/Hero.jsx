@@ -52,8 +52,8 @@ const Hero = () => {
                         <HiOutlineArrowNarrowRight className="group-hover:translate-x-1 transition-transform" />
                     </a>
                     <a
-                        href="/CV.pdf"
-                        download
+                        href="/CV.jpg"
+                        download="Balogun_CV.jpg"
                         className="flex items-center gap-2 bg-white dark:bg-gray-900 border-2 border-primary/20 text-gray-900 dark:text-white px-8 py-4 rounded-full font-bold hover:border-primary transition-all hover:scale-105 active:scale-95 shadow-sm"
                     >
                         Download CV
@@ -67,7 +67,7 @@ const Hero = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1, duration: 1 }}
-                className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+                className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 md:gap-2"
             >
                 <span className="text-xs uppercase tracking-widest text-gray-400 font-bold">Scroll Down</span>
                 <div className="w-1 h-12 bg-gray-200 dark:bg-gray-800 rounded-full relative overflow-hidden">
