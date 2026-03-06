@@ -6,6 +6,13 @@ const Timeline = () => {
     const events = [
         {
             year: "2025",
+            title: "ALX Professional Foundation",
+            category: "Certification",
+            icon: <FiAward />,
+            description: "Completed Professional Development Skills for the Digital Age at ALX Africa, mastering cross-functional collaboration and digital proficiency."
+        },
+        {
+            year: "2025",
             title: "Networking Specialist Studies",
             category: "Studies",
             icon: <FiBookOpen />,

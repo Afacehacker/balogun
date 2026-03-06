@@ -95,9 +95,14 @@ const Projects = () => {
                                     </div>
 
                                     <div className="flex items-center gap-4">
-                                        <div className="w-full flex items-center justify-center gap-2 bg-gray-100 dark:bg-gray-800 text-gray-400 py-3 rounded-xl font-bold cursor-default">
-                                            Project Documentation Internal
-                                        </div>
+                                        <a
+                                            href="https://drive.google.com/drive/folders/1JQN1p5vdA8T3r-yx_ANIWyJbJxxfyxW7"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white py-3 rounded-xl font-bold transition-all transform hover:-translate-y-1 shadow-lg cursor-pointer"
+                                        >
+                                            View Project Files
+                                        </a>
                                     </div>
                                 </div>
                             </div>

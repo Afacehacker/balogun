@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaAws, FaNetworkWired, FaShieldAlt } from 'react-icons/fa';
+import { FaAws, FaNetworkWired, FaShieldAlt, FaGraduationCap } from 'react-icons/fa';
 
 const Certifications = () => {
     const certs = [
@@ -17,6 +17,13 @@ const Certifications = () => {
             icon: <FaNetworkWired className="text-5xl text-[#0070AD]" />,
             description: "Covers the configuration, management, and troubleshooting of common wired and wireless networks.",
             date: "Earned"
+        },
+        {
+            title: "ALX Professional Foundation Course",
+            issuer: "ALX Africa",
+            icon: <FaGraduationCap className="text-5xl text-[#00A651]" />,
+            description: "A comprehensive course focusing on Professional Development Skills for the Digital Age, emphasizing technical proficiency and soft skills.",
+            date: "30th Sept 2025"
         }
     ];
 
