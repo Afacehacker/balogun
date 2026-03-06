@@ -1,8 +1,11 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { FaAws, FaNetworkWired, FaShieldAlt, FaGraduationCap } from 'react-icons/fa';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FaAws, FaNetworkWired, FaShieldAlt, FaGraduationCap, FaExternalLinkAlt } from 'react-icons/fa';
+import { IoClose } from 'react-icons/io5';
 
 const Certifications = () => {
+    const [selectedCert, setSelectedCert] = React.useState(null);
+
     const certs = [
         {
             title: "AWS Certified Cloud Practitioner",
@@ -23,7 +26,8 @@ const Certifications = () => {
             issuer: "ALX Africa",
             icon: <FaGraduationCap className="text-5xl text-[#00A651]" />,
             description: "A comprehensive course focusing on Professional Development Skills for the Digital Age, emphasizing technical proficiency and soft skills.",
-            date: "30th Sept 2025"
+            date: "30th Sept 2025",
+            certificateImage: "/ALX_Certificate.jpeg"
         }
     ];
 
@@ -68,16 +72,26 @@ const Certifications = () => {
                                 <div className="p-5 rounded-2xl bg-gray-50 dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-inner group-hover:scale-110 transition-transform">
                                     {cert.icon}
                                 </div>
-                                <div>
+                                <div className="flex-1">
                                     <div className="flex items-center gap-2 mb-2">
                                         <FaShieldAlt className="text-primary" />
                                         <span className="text-sm font-bold text-primary uppercase tracking-widest">{cert.date}</span>
                                     </div>
                                     <h3 className="text-2xl font-bold mb-1 dark:text-white">{cert.title}</h3>
                                     <p className="text-primary font-medium mb-4">{cert.issuer}</p>
-                                    <p className="text-gray-500 dark:text-gray-400 leading-relaxed">
+                                    <p className="text-gray-500 dark:text-gray-400 leading-relaxed mb-4">
                                         {cert.description}
                                     </p>
+
+                                    {cert.certificateImage && (
+                                        <button
+                                            onClick={() => setSelectedCert(cert)}
+                                            className="flex items-center gap-2 text-primary font-bold hover:underline transition-all"
+                                        >
+                                            <FaExternalLinkAlt className="text-sm" />
+                                            View Certificate
+                                        </button>
+                                    )}
                                 </div>
                             </div>
 
@@ -88,6 +102,44 @@ const Certifications = () => {
                     ))}
                 </div>
             </div>
+
+            {/* Certificate Modal */}
+            <AnimatePresence>
+                {selectedCert && (
+                    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            onClick={() => setSelectedCert(null)}
+                            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+                        ></motion.div>
+                        <motion.div
+                            initial={{ scale: 0.9, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.9, opacity: 0 }}
+                            className="relative z-10 max-w-4xl w-full bg-white dark:bg-gray-900 rounded-3xl overflow-hidden shadow-2xl"
+                        >
+                            <div className="p-4 border-b dark:border-gray-800 flex justify-between items-center bg-gray-50 dark:bg-gray-800">
+                                <h3 className="text-xl font-bold dark:text-white">{selectedCert.title}</h3>
+                                <button
+                                    onClick={() => setSelectedCert(null)}
+                                    className="p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-full transition-colors"
+                                >
+                                    <IoClose className="text-2xl dark:text-white" />
+                                </button>
+                            </div>
+                            <div className="p-2 max-h-[80vh] overflow-y-auto flex justify-center">
+                                <img
+                                    src={selectedCert.certificateImage}
+                                    alt={selectedCert.title}
+                                    className="max-w-full h-auto rounded-xl"
+                                />
+                            </div>
+                        </motion.div>
+                    </div>
+                )}
+            </AnimatePresence>
         </section>
     );
 };
